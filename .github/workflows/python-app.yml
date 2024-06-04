@@ -51,11 +51,17 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+    - name: List test files
+      run: |
+        echo "Listing test files"
+        find . -name "test_*.py" -print
+
     - name: Test with pytest
       run: pytest
 
     - name: Test Flask application
       run: |
-        export FLASK_APP=your_flask_app.py
+        export FLASK_APP=app.py
         export FLASK_ENV=development
         pytest
+
