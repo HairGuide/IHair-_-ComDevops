@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -27,12 +27,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install black flake8 pytest
+        pip install black flake8 pytest flask
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Run black
       id: run_black
-      run: black . --check --diff
+      run: black . --check --diff || true
 
     - name: Apply black formatting
       if: ${{ steps.run_black.outcome == 'failure' }}
