@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python Application with Code Formatter
+name: Python Application with Code Formatter and Flask
 
 on:
   push:
@@ -54,3 +54,8 @@ jobs:
     - name: Test with pytest
       run: pytest
 
+    - name: Test Flask application
+      run: |
+        export FLASK_APP=your_flask_app.py
+        export FLASK_ENV=development
+        pytest
